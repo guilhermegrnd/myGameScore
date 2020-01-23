@@ -82,7 +82,6 @@ namespace myGameScore.Controllers
                             lowestPoints = scores[i].Points;
                         }
 
-                        Console.WriteLine("PONTO ATUAL: " + scores[i].Points.ToString() + "RECORD: " + recordPoints);
                         if (scores[i].Points > recordPoints)
                         {
                             recordsBeated++;
@@ -94,7 +93,7 @@ namespace myGameScore.Controllers
 
                     totalGames = i;
                     date2 = scores[j].Date;
-                    averagePoints = totalPoints / totalGames;
+                    averagePoints = (double)totalPoints / (double)totalGames;
                     string[] dateSplit = date1.Split("-");
                     date1 = dateSplit[2] + "/" + dateSplit[1] + "/" + dateSplit[0];
                     dateSplit = date2.Split("-");
