@@ -39,23 +39,14 @@ namespace myGameScore.Controllers
 
         public IActionResult Result()
         {
-            try
-            {
-                var scores = _context.scores
-                    .OrderBy(item => item.Date)
-                    .ToList();
-                dynamic jsonResult = new JObject();
-                jsonResult = Score.GetResults(scores);
-                ViewBag.gamesResult = jsonResult;
+            var scores = _context.scores
+                .OrderBy(item => item.Date)
+                .ToList();
 
-                return View();
-            }
-            catch(Exception e)
-            {
-                string jsonStr = "{\"status\":\"err\",\"msg\":\"" + e.Message + "\"}";
-                var json = JObject.Parse(jsonStr);
-                return Json(json);
-            }
+            dynamic jsonResult = Score.GetResults(scores);
+            ViewBag.gamesResult = jsonResult;
+
+            return View();
         }
 
         [HttpPost]

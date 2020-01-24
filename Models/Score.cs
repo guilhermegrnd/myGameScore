@@ -24,50 +24,58 @@ namespace myGameScore.Models
             string date1 = "";
             string date2 = "";
             string periodo = "";
+            string error = "";
             int i = 0;
-            if (scores.Count() > 0)
+            try
             {
-                int j = scores.Count() - 1;
-                scores.ForEach(x =>
+                if (scores.Count() > 0)
                 {
-                    if (i == 0)
+                    int j = scores.Count() - 1;
+                    scores.ForEach(x =>
                     {
-                        date1 = scores[i].Date;
-                        recordPoints = scores[i].Points;
-                        lowestPoints = scores[i].Points;
-                        highestPoints = scores[i].Points;
-                    }
+                        if (i == 0)
+                        {
+                            date1 = scores[i].Date;
+                            recordPoints = scores[i].Points;
+                            lowestPoints = scores[i].Points;
+                            highestPoints = scores[i].Points;
+                        }
 
-                    totalPoints += scores[i].Points;
-                    if (scores[i].Points > highestPoints)
-                    {
-                        highestPoints = scores[i].Points;
-                    }
+                        totalPoints += scores[i].Points;
+                        if (scores[i].Points > highestPoints)
+                        {
+                            highestPoints = scores[i].Points;
+                        }
 
-                    if (scores[i].Points < lowestPoints)
-                    {
-                        lowestPoints = scores[i].Points;
-                    }
+                        if (scores[i].Points < lowestPoints)
+                        {
+                            lowestPoints = scores[i].Points;
+                        }
 
-                    if (scores[i].Points > recordPoints)
-                    {
-                        recordsBeated++;
-                        recordPoints = scores[i].Points;
-                    }
+                        if (scores[i].Points > recordPoints)
+                        {
+                            recordsBeated++;
+                            recordPoints = scores[i].Points;
+                        }
 
-                    i++;
-                });
+                        i++;
+                    });
 
-                totalGames = i;
-                date2 = scores[j].Date;
-                averagePoints = (double)totalPoints / (double)totalGames;
-                string[] dateSplit = date1.Split("-");
-                date1 = dateSplit[2] + "/" + dateSplit[1] + "/" + dateSplit[0];
-                dateSplit = date2.Split("-");
-                date2 = dateSplit[2] + "/" + dateSplit[1] + "/" + dateSplit[0];
-                periodo = date1 + " até " + date2;
+                    totalGames = i;
+                    date2 = scores[j].Date;
+                    averagePoints = (double)totalPoints / (double)totalGames;
+                    string[] dateSplit = date1.Split("-");
+                    date1 = dateSplit[2] + "/" + dateSplit[1] + "/" + dateSplit[0];
+                    dateSplit = date2.Split("-");
+                    date2 = dateSplit[2] + "/" + dateSplit[1] + "/" + dateSplit[0];
+                    periodo = date1 + " até " + date2;
+                }
             }
-
+            catch(Exception e)
+            {
+                error = e.Message;
+            }
+ 
             dynamic jsonResult = new JObject();
             jsonResult.periodo = periodo;
             jsonResult.totalGames = totalGames;
@@ -76,6 +84,7 @@ namespace myGameScore.Models
             jsonResult.highestPoints = highestPoints;
             jsonResult.lowestPoints = lowestPoints;
             jsonResult.recordsBeated = recordsBeated;
+            jsonResult.error = error;
 
             return jsonResult;
         }
