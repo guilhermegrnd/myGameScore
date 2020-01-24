@@ -2,7 +2,11 @@
 
 Autor: Guilherme Augusto Granado
 
-Projeto "myGameScore", de marcação e análise de pontos de basquete. Desenvolvido pela oportunidade de aprender e aprimorar conhecimentos.
+Projeto "myGameScore", aplicação de marcação e análise de pontos de basquete. 
+
+Totalmente responsivo.
+
+Desenvolvido pela oportunidade de aprender e aprimorar conhecimentos.
 
 Todos recursos utilizados: C# ASP.NET Core MVC, Entity Framework Core, SQL Server, Razor Page, HTML, Javascript, JQuery, bootstrap.
 
